@@ -7,7 +7,7 @@ const io = socket(server);
 
 const PORT = process.env.PORT || 5050;
 
-if (process.env.NODE_NEV === "production"){
+if (process.env.NODE_ENV === "production"){
   app.use(express.static('build'));
   app.get('*',(req,res) => {
     req.sendFile(path.resolve(__dirname,'build', 'index.html'))
