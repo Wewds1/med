@@ -5,7 +5,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socket(server);
 const path = require('path');
-
+const cors = require('cors')
 const PORT = process.env.PORT || 5050;
 
 app.get("/", (req, res) => {
