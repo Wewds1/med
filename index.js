@@ -8,6 +8,9 @@ const path = require('path');
 
 const PORT = process.env.PORT || 5050;
 
+app.get("/", (req, res) => {
+  res.send("Server is running");
+});
 
 
 if (process.env.NODE_ENV === 'production') {
