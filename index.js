@@ -11,7 +11,7 @@ const users = {};
 
 const socketToRoom = {};
 
-app.get("/", (req, res) => {
+app.get("/client", (req, res) => {
   res.send("Server is running");
 });
 
