@@ -67,7 +67,7 @@ const App = () => {
               <AuthProvider>
                 <Switch>
                   {/* ROOT */}
-                  <Route exact path="/api" component={LoggedIn} />
+                  <Route exact path="/" component={LoggedIn} />
 
                   {/* DOCTOR ROUTES */}
                   <Route
