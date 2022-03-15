@@ -9,21 +9,33 @@ const path = require('path');
 const PORT = process.env.PORT || 5050;
 
 
-if (process.env.NODE_NEV === "production"){
-  app.use(express.static('build'));
-  app.use("/client", express.static(path.join(__dirname, "build")));
-  app.get('/',(req,res) => {
-    req.sendFile(path.resolve(__dirname,'build', 'index.html'))
-  })
+
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, 'client/build')));
+// Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
 }
+const whitelist = ['http://localhost:3000', 'http://localhost:5050', 'https://heroku123-app.herokuapp.com/']
+const corsOptions = {
+  origin: function (origin, callback) {
+    console.log("** Origin of request " + origin)
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      console.log("Origin acceptable")
+      callback(null, true)
+    } else {
+      console.log("Origin rejected")
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+app.use(cors(corsOptions))
 
 const users = {};
 
 const socketToRoom = {};
-
-app.get("/client", (req, res) => {
-  res.send("Server is running");
-});
 
 //SOCKET CONFIGURATION
 
