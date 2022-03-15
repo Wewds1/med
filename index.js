@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 5050;
 
 if (process.env.NODE_NEV === "production"){
   app.use(express.static('build'));
+  app.use("/client", express.static(path.join(__dirname, "build")));
   app.get('/',(req,res) => {
     req.sendFile(path.resolve(__dirname,'build', 'index.html'))
   })
