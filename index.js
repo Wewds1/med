@@ -22,6 +22,11 @@ const corsOptions = {
   }
 }
 app.use(cors(corsOptions))
+app.use(express.static(path.join(__dirname, 'client/build')));
+  app.get("/", (req, res) => {
+    res.send("Server is running");
+  });
+  
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
@@ -32,15 +37,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-
-  app.use(express.static(path.join(__dirname, 'client/build')));
-  app.get("/", (req, res) => {
-    res.send("Server is running");
-  });
-  
-  app.get ('/', (req , res) => {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  })
   
 
 
