@@ -8,19 +8,7 @@ const path = require('path');
 const cors = require('cors')
 const PORT = process.env.PORT || 5050;
 
-
-  app.use(express.static(path.join(__dirname, 'client/build')));
-  app.get("/*", (req, res) => {
-    res.send("Server is running");
-  });
-  
-   
-  app.get ('/*', (req , res) => {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  })
-  
-
-const whitelist = ['http://localhost:3000', 'http://localhost:5050', 'https://heroku123-app.herokuapp.com/']
+const whitelist = ['http://localhost:3000', 'http://localhost:5050', 'https://heroku123-app.herokuapp.com']
 const corsOptions = {
   origin: function (origin, callback) {
     console.log("** Origin of request " + origin)
@@ -34,6 +22,28 @@ const corsOptions = {
   }
 }
 app.use(cors(corsOptions))
+
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, 'client/build')));
+// Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
+
+
+  app.use(express.static(path.join(__dirname, 'client/build')));
+  app.get("/api/", (req, res) => {
+    res.send("Server is running");
+  });
+  
+  app.get ('*', (req , res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  })
+  
+
+
 
 const users = {};
 
