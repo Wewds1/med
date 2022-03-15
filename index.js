@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5050;
 
 
   app.use(express.static(path.join(__dirname, 'client/build')));
-  app.get("/api", (req, res) => {
+  app.get("/client", (req, res) => {
     res.send("Server is running");
   });
   
