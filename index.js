@@ -6,40 +6,14 @@ const server = http.createServer(app);
 const io = socket(server);
 const path = require('path');
 const cors = require('cors')
-const PORT = process.env.PORT || 5050;
+const PORT = process.env.PORT || 443;
 
-const whitelist = ['http://localhost:3000', 'http://localhost:5050', 'https://heroku123-app.herokuapp.com']
-const corsOptions = {
-  origin: function (origin, callback) {
-    console.log("** Origin of request " + origin)
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      console.log("Origin acceptable")
-      callback(null, true)
-    } else {
-      console.log("Origin rejected")
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
+if (process.env.NODE_ENV === "production"){
+  app.use(express.static('build'));
+  app.get('*',(req,res) => {
+    req.sendFile(path.resolve(__dirname,'build', 'index.html'))
+  })
 }
-app.use(cors(corsOptions))
-app.use(express.static(path.join(__dirname, 'client/build')));
-  app.get("/", (req, res) => {
-    res.send("Server is running");
-  });
-  
-
-if (process.env.NODE_ENV === 'production') {
-  // Serve any static files
-  app.use(express.static(path.join(__dirname, 'client/build')));
-// Handle React routing, return all requests to React app
-  app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  });
-}
-
-  
-
-
 
 const users = {};
 
