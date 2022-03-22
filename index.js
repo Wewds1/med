@@ -24,7 +24,7 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 app.use(express.static(path.join(__dirname, 'client/build')));
-  app.get("*", (req, res) => {
+  app.get("/", (req, res) => {
     res.send("Server is running");
   });
   
