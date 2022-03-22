@@ -38,11 +38,8 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-  
 
 
-
-=======
 if (process.env.NODE_ENV === "production"){
   app.use(express.static('build'));
   app.get('*',(req,res) => {
@@ -50,7 +47,6 @@ if (process.env.NODE_ENV === "production"){
   })
 }
 
->>>>>>> 1ce9e8965c40ca627b8f2c8ae9b09c635a4eb39b
 const users = {};
 
 const socketToRoom = {};
