@@ -9,7 +9,7 @@ const cors = require('cors')
 const PORT = process.env.PORT || 443;
 
 
-const whitelist = ['http://localhost:3000', 'http://localhost:443', 'https://heroku123-app.herokuapp.com']
+const whitelist = ['http://localhost:3000', 'http://localhost:443', 'https://medtalk-app.herokuapp.com/']
 const corsOptions = {
   origin: function (origin, callback) {
     console.log("** Origin of request " + origin)
