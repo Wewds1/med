@@ -7,6 +7,8 @@ const io = socket(server);
 const path = require('path');
 const cors = require('cors')
 const PORT = process.env.PORT || 443;
+
+
 const whitelist = ['http://localhost:3000', 'http://localhost:443', 'https://heroku123-app.herokuapp.com']
 const corsOptions = {
   origin: function (origin, callback) {
@@ -22,12 +24,12 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 app.use(express.static(path.join(__dirname, 'client/build')));
-  app.get("/", (req, res) => {
+  app.get("*", (req, res) => {
     res.send("Server is running");
   });
   
 
-if (process.env.NODE_ENV == 'production') {
+if (process.env.NODE_ENV === 'production') {
   // Serve any static files
   app.use(express.static(path.join(__dirname, 'client/build')));
 // Handle React routing, return all requests to React app
