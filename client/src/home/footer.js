@@ -82,16 +82,17 @@ const Footer = () => {
 
           {/* CONTACTS */}
           <Grid xs={12} md={4}>
+            
             <Typography variant="h6" gutterBottom sx={footerTitle}>
               Contact us
             </Typography>
-            <IconButton href="#" sx={iconButton}>
+            <IconButton href="https://mail.google.com/mail/u/0/" sx={iconButton}>
               <EmailIcon />
               <Typography variant="body2">
                 daveallenborja@gmail.com{" "}
               </Typography>
             </IconButton>
-            <IconButton href="https://mail.google.com/mail/u/0/" sx={iconButton}>
+            <IconButton href="" sx={iconButton}>
               <PhoneIcon />
               <Typography variant="body2"> +63 945 492 2465 </Typography>
             </IconButton>
