@@ -150,17 +150,6 @@ const Navbar = () => {
             </Tooltip>
             <ListItemText>Past Appointments</ListItemText>
           </ListItem>
-
-          {/* LATEST UPDATES */}
-          <ListItem button component="a" href="/patient/latest_updates">
-            <Tooltip title="Latest Updates" placement="right">
-              <ListItemIcon>
-                <NewspaperIcon />
-              </ListItemIcon>
-            </Tooltip>
-            <ListItemText>Latest Updates</ListItemText>
-          </ListItem>
-
           {/* SIGN OUT */}
           <ListItem button onClick={handleSignout}>
             <Tooltip title="Sign Out" placement="right">

@@ -140,17 +140,6 @@ const Navbar = () => {
           </ListItem>
 
       
-
-          {/* READ FEEDBACKS */}
-          <ListItem button component="a" href="/feedbacks">
-            <Tooltip title="Read Feedbacks" placement="right">
-              <ListItemIcon>
-                <EmailIcon />
-              </ListItemIcon>
-            </Tooltip>
-            <ListItemText>Read Feedbacks</ListItemText>
-          </ListItem>
-
           {/* SIGN OUT */}
           <ListItem button onClick={handleSignout}>
             <Tooltip title="Sign Out" placement="right">

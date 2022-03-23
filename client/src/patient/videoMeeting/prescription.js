@@ -25,6 +25,7 @@ const Prescription = (props) => {
   const [prescriptions, setPrescriptions] = useState([]);
 
   var doctorName = "";
+  var doctorRegNumber = "";
   var doctorSpeciality = "";
   var patientName = "";
   var patientAge = "";
@@ -62,6 +63,7 @@ const Prescription = (props) => {
       if (doctor.uid === props.doctorUID) {
         doctorName = doctor.name;
         doctorSpeciality = doctor.medicalSpeciality;
+        doctorRegNumber = doctor.regNumber;
       }
     });
   }
@@ -89,22 +91,24 @@ const Prescription = (props) => {
   const downloadPrescription = () => {
     var doc = new jsPDF();
     var i = 20;
-    var j = 120;
+    var j = 150;
     doc.setFontSize("15");
-    doc.addImage("/images/Medicare.png", "PNG", 5, 5, 200, 15);
+  
     doc.text("Date: ", 20, 30);
     doc.text(date, 50, 30);
     doc.text("Doctor: ", 20, 40);
     doc.text(doctorName, 50, 40);
     doc.text("Medical Speciality: ", 20, 50);
     doc.text(doctorSpeciality, 70, 50);
-    doc.text("Patient: ", 20, 70);
-    doc.text(patientName, 50, 70);
-    doc.text("Age: ", 20, 80);
-    doc.text(patientAge, 50, 80);
-    doc.text("Gender: ", 20, 90);
-    doc.text(patientGender, 50, 90);
-    doc.text("Prescription: ", 20, 110);
+    doc.text("Registration Number: ", 20, 60);
+    doc.text(doctorRegNumber, 80, 60  );
+    doc.text("Patient: ", 20, 80);
+    doc.text(patientName, 50, 80);
+    doc.text("Age: ", 20, 90);
+    doc.text(patientAge, 50, 90);
+    doc.text("Gender: ", 20, 100);
+    doc.text(patientGender, 50, 100);
+    doc.text("Prescription: ", 20, 130);
     prescriptions.map((prescript) => {
       doc.text(prescript.prescription, i, j);
       j = j + 10;

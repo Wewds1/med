@@ -129,7 +129,11 @@ const Patient_Signin = () => {
                 Sign In
               </Button>
 
-
+              <Grid item>
+                  <Link href="/patient_signup" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
 
     
             </Box>
