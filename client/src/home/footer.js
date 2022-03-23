@@ -91,7 +91,7 @@ const Footer = () => {
                 daveallenborja@gmail.com{" "}
               </Typography>
             </IconButton>
-            <IconButton href="#" sx={iconButton}>
+            <IconButton href="https://mail.google.com/mail/u/0/" sx={iconButton}>
               <PhoneIcon />
               <Typography variant="body2"> +63 945 492 2465 </Typography>
             </IconButton>
