@@ -127,7 +127,7 @@ const Prescription = (props) => {
     doc.text(doctorName, 50, 40);
     doc.text("Medical Speciality: ", 20, 50);
     doc.text(doctorSpeciality, 70, 50);
-    doc.text("Registration Number: ", 20, 60);
+    doc.text("License Number: ", 20, 60);
     doc.text(doctorRegNumber, 80, 60  );
     doc.text("Patient: ", 20, 80);
     doc.text(patientName, 50, 80);
