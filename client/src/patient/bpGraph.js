@@ -14,30 +14,30 @@ import {
 } from "recharts";
 import Title from "./dashboard/title";
 
-function createData(date, sugarLevel) {
-  return { date, sugarLevel };
+function createData(date, bloodLevel) {
+  return { date, bloodLevel };
 }
 
 const BPGraph = (props) => {
   const theme = useTheme();
-  const [sugarLevels, setSugarLevels] = useState([]);
+  const [bloodLevels, setBloodLevels] = useState([]);
 
   useEffect(() => {
     db.collection("patients")
       .doc(props.uid)
-      .collection("bloodSugarLevel")
+      .collection("bloodPressureLevel")
       .onSnapshot((snapshot) => {
-        setSugarLevels(snapshot.docs.map((doc) => doc.data()));
+        setBloodLevels(snapshot.docs.map((doc) => doc.data()));
       });
   }, []);
 
   const data = [];
   {
-    sugarLevels.map((sugar) => {
+    bloodLevels.map((blood) => {
       data.push(
         createData(
-          new Date(sugar.sentAt.seconds * 1000).toLocaleDateString("en-US"),
-          sugar.sugarLevel
+          new Date(blood.sentAt.seconds * 1000).toLocaleDateString("en-US"),
+          blood.bloodLevel
         )
       );
     });
@@ -45,7 +45,7 @@ const BPGraph = (props) => {
 
   return (
     <React.Fragment>
-      <Title>Blood Sugar Level</Title>
+      <Title>Blood Pressure</Title>
       <ResponsiveContainer width="100%">
         <LineChart
           data={data}
@@ -68,7 +68,7 @@ const BPGraph = (props) => {
                 ...theme.typography.body1,
               }}
             >
-              Sugar-Level (mg/dL)
+              Blood Pressure
             </Label>
           </YAxis>
           <Tooltip />
@@ -76,7 +76,7 @@ const BPGraph = (props) => {
           <Line
             isAnimationActive={false}
             type="monotone"
-            dataKey="sugarLevel"
+            dataKey="bloodLevel"
             activeDot={{ r: 8 }}
             stroke={theme.palette.primary.main}
           />

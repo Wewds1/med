@@ -16,13 +16,13 @@ const Register = () => {
       {/* REGISTER AS DOCTOR */}
       <Grid item xs={12} md={6}>
         <CardActionArea component="a" href="#">
-          <Card sx={{ display: "flex" }}>
+          <Card sx={{ display: "flex" , borderRadius: "20px",}}>
             <CardContent sx={{ flex: 1, fontFamily: "Raleway" }}>
-              <Typography component="h1" variant="h4" sx={boldRaleway}>
-                Register as a Doctor
+              <Typography component="h1" variant="h3" sx={boldRaleway}>
+                Doctor?
               </Typography>
               <Typography variant="h5" paragraph sx={raleway}>
-                Sign Up to provide consultations to patients
+                Provide medical consultations for Patients!
               </Typography>
               <Button sx={button} href="/doctor_signup">
                 Sign Up
@@ -37,7 +37,7 @@ const Register = () => {
             <CardMedia
               component="img"
               sx={cardMedia}
-              image="images/docregister.jpg"
+              image="images/doctorK.png"
               alt="Doctor"
             />
           </Card>
@@ -47,13 +47,13 @@ const Register = () => {
       {/* REGISTER AS PATIENT */}
       <Grid item xs={12} md={6}>
         <CardActionArea component="a" href="#">
-          <Card sx={{ display: "flex" }}>
+          <Card sx={{ display: "flex" , borderRadius: "20px",}}>
             <CardContent sx={{ flex: 1 }}>
-              <Typography component="h1" variant="h4" sx={boldRaleway}>
-                Register as a Patient
+              <Typography component="h1" variant="h3" sx={boldRaleway}>
+                Patient?
               </Typography>
               <Typography variant="h5" paragraph sx={raleway}>
-                Sign Up to book appointments with doctors
+                Book appointments and Consult with Doctors!
               </Typography>
               <Button sx={button} href="/patient_signup">
                 Sign Up
@@ -74,35 +74,9 @@ const Register = () => {
           </Card>
         </CardActionArea>
       </Grid>
-
+      
       {/* ADMIN LOGIN */}
-      <Grid item xs={12}>
-        <CardActionArea component="a" href="#">
-          <Card sx={{ display: "flex" }}>
-            <CardContent sx={{ flex: 1 }}>
-              <Typography component="h1" variant="h4" sx={boldRaleway}>
-                Sign in as an Admin
-              </Typography>
-              <Typography variant="h5" paragraph sx={raleway}>
-                Only verified admins of MedMeet can login using the email ID
-                provided to them
-              </Typography>
-
-              <Button sx={button} href="/admin_signin">
-                Sign In
-              </Button>
-            </CardContent>
-
-            {/* Image */}
-            <CardMedia
-              component="img"
-              sx={cardMedia}
-              image="images/admin.jpg"
-              alt="Admin"
-            />
-          </Card>
-        </CardActionArea>
-      </Grid>
+        
     </Grid>
   );
 };

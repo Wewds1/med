@@ -8,7 +8,7 @@ const Header = () => {
       {/* Increase the priority of the hero background image */}
       {
         <img
-          style={{ display: "none" }}
+          style={{ display: "none", borderTop: "100px", borderBottom: "-105px"}}
           src={process.env.PUBLIC_URL + "images/home.jpg"}
           alt="MedMeet"
         />
@@ -18,7 +18,7 @@ const Header = () => {
 
       {/* Text above image */}
       <Grid container>
-        <Grid item md={6}>
+        <Grid item md={8}>
           <Box sx={headerBox}>
             <Typography
               component="h1"
@@ -27,11 +27,11 @@ const Header = () => {
               gutterBottom
               sx={subtitle}
             >
-              "We are here for your health..."
+              "Where Medical and Technology Meets!"
             </Typography>
             <Typography variant="h5" color="inherit" paragraph sx={raleway}>
-              Consult from the best doctors just by sitting at your home or using our special device 
-              because we care for your health every moment.
+               Consult with medical professionals from the comfort of your own home or via our 
+               device because we care about your health.
             </Typography>
           </Box>
         </Grid>

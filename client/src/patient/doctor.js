@@ -64,20 +64,8 @@ const Doctor = () => {
                   <Paper sx={paper}>
                     <>
                       <Typography>Name: {doctor.name}</Typography>
-
                       <Typography>
                         Medical Speciality: {doctor.medicalSpeciality}
-                      </Typography>
-                      <Typography>
-                        Experience: {doctor.experience} years
-                      </Typography>
-                      <Typography>Age: {doctor.age} years</Typography>
-                      <Typography>Gender: {doctor.gender}</Typography>
-                      <Typography>Degree: {doctor.degree}</Typography>
-                      <Typography>
-                        Address: {doctor.address1}, {doctor.address2},{" "}
-                        {doctor.city}, {doctor.state}, {doctor.country},{" "}
-                        {doctor.pincode}
                       </Typography>
                       <Typography>
                         Time Slot :{" "}

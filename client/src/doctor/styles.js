@@ -5,12 +5,13 @@ const theme = createTheme();
 export const container = {
   mt: "12vh",
   ml: "5vw",
-  minHeight: "100vh",
-  background: "linear-gradient(135deg, #dff6fe 30%, #0095de 90%)",
-  backgroundImage: `url('../images/blue2.jpg')`,
+  minHeight: "120vh",
+  minWidth: "85vw",
+  background: "linear-gradient(135deg, #dff6fe 30%, #f8b9c9  90%)",
+  backgroundImage: `url('../images/102.jpg')`,
   backgroundPosition: "center",
   backgroundRepeat: "repeat-x",
-  backgroundSize: "cover",
+  backgroundSize: "100%",
   [theme.breakpoints.down("md")]: {
     mt: "10vh",
     ml: "10vw",
@@ -20,6 +21,17 @@ export const container = {
     ml: "12vw",
     maxWidth: "80vw",
   },
+};
+export const button = {
+  backgroundColor: "#ff55a3",
+  color: "#ffffff",
+  margin: "1%", 
+  fontWeight: "bold",
+  "&:hover": {
+    backgroundColor: "#f8b9c9",
+    color: "#3284be",
+  },
+  
 };
 
 export const paper = {
@@ -78,7 +90,7 @@ export const cancelButton = {
 };
 
 export const signinGrid = {
-  backgroundImage: `url('images/signin_doctor.jpg')`,
+  backgroundImage: `url('images/signP.png')`,
   backgroundRepeat: "no-repeat",
   backgroundColor: (t) =>
     t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],
@@ -87,7 +99,7 @@ export const signinGrid = {
 };
 
 export const signupGrid = {
-  backgroundImage: `url("images/signup_doctor.jpg")`,
+  backgroundImage: `url("images/Consultation.png")`,
   backgroundRepeat: "no-repeat",
   backgroundColor: (t) =>
     t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],

@@ -20,28 +20,27 @@ const About = () => {
         gutterBottom
         sx={description}
       >
-        MedMeet is for those people who don't want to wait in long queues to
-        book an appointment with one of the best doctors nearby and also for
-        those doctors who wish to consult their patients at their own
-        convenience.
+        {/* For patients who don't want to wait in long lines to make doctor appointments and for 
+        medical professionals who prefer to consult with their patients at their convenience, 
+        there is MEDMEET. */}
         <br />
-        <i>
+        {/* <i>
           <b> Let's together bring a change in the medical industry!</b>
-        </i>
+        </i>   */}
       </Typography>
       <Paper sx={aboutPaper}>
         {/* Increase the priority of the hero background image */}
         {
-          <img
-            style={{ display: "none" }}
-            src={process.env.PUBLIC_URL + "images/aboutdoctors.jpg"}
-            alt="Doctors"
-          />
+          // <img
+          //   style={{ display: "none" }}
+          //   src={process.env.PUBLIC_URL + "images/aboutdoctors.jpg"}
+          //   alt="Doctors"
+          // />
         }
         <Box sx={box} />
 
         {/* Text above image */}
-        <Grid container>
+        {/* <Grid container>
           <Grid item md={6}>
             <Box sx={headerBox}>
               <Typography
@@ -54,11 +53,11 @@ const About = () => {
                 "Trusted Professionals"
               </Typography>
               <Typography variant="h5" color="inherit" paragraph sx={raleway}>
-                Consult one of the best doctors just by a click!
+                Consult Now!
               </Typography>
             </Box>
           </Grid>
-        </Grid>
+        </Grid> */}
       </Paper>
     </div>
   );

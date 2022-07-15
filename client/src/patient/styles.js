@@ -2,20 +2,23 @@ import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme();
 
+
 export const container = {
   mt: "12vh",
   ml: "5vw",
-  minHeight: "100vh",
+  minHeight: "120vh",
+  minWidth: "85vw",
   background: "linear-gradient(135deg, #dff6fe 30%, #0095de 90%)",
-  backgroundImage: `url('../images/blue2.jpg')`,
+  backgroundImage: `url('../images/102.jpg')`,
   backgroundPosition: "center",
   backgroundRepeat: "repeat-x",
-  backgroundSize: "cover",
+  backgroundSize: "100%",
   [theme.breakpoints.down("md")]: {
     mt: "10vh",
     ml: "10vw",
     maxWidth: "95vw",
   },
+  
   [theme.breakpoints.down("sm")]: {
     ml: "12vw",
     maxWidth: "85vw",
@@ -28,6 +31,17 @@ export const paper = {
   flexDirection: "column",
 };
 
+
+export const button  = {
+  backgroundColor: "#ff55a3",
+  color: "#ffffff",
+  margin: "1%", 
+  fontWeight: "bold",
+  "&:hover": {
+    backgroundColor: "#f8b9c9",
+    color: "#3284be",
+  },
+}
 export const transparentPaper = {
   p: 2,
   display: "flex",
@@ -63,7 +77,7 @@ export const listItem = {
 export const typography = { fontWeight: "bold", color: "#063547" };
 
 export const signinGrid = {
-  backgroundImage: `url('images/signin_patient.jpg')`,
+  backgroundImage: `url('images/signs.png')`,
   backgroundRepeat: "no-repeat",
   backgroundColor: (t) =>
     t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],
@@ -72,7 +86,7 @@ export const signinGrid = {
 };
 
 export const signupGrid = {
-  backgroundImage: `url('images/signup_patient.jpg')`,
+  backgroundImage: `url('images/Consult.png')`,
   backgroundRepeat: "no-repeat",
   backgroundColor: (t) =>
     t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],

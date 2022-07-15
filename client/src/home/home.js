@@ -6,12 +6,11 @@ import Header from "./header";
 import Register from "./register";
 import About from "./about";
 import Footer from "./footer";
+import { red } from "@mui/material/colors";
+
 
 const sections = [
-  { title: "Home", url: "#" },
-  { title: "About", url: "#about" },
-  { title: "Register", url: "#register" },
-  { title: "Contact", url: "#contact" },
+
 ];
 
 const theme = createTheme();
@@ -20,15 +19,15 @@ const Home = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container maxWidth="lg" sx={{ backgroundColor: "#ffddf4" }}>
+      <Container maxWidth="lg"  sx={{ backgroundColor: "#f9d5e5" } }>
         {/* NAVBAR COMPONENT - links to various sections*/}
         <Navbar sections={sections} />
 
         <main>
           {/* HEADER COMPONENT - image with tagline*/}
-          <Header />
-          {/* REGISTER COMPONENT - signup/signin for doctor/patient */}
           <Register />
+          {/* REGISTER COMPONENT - signup/signin for doctor/patient */}
+          <Header />
           <br />
           <br />
           {/* ABOUT COMPONENT - about doctors */}

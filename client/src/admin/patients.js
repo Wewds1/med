@@ -62,13 +62,13 @@ const Patients = () => {
             <Paper sx={paper}>
               <List>
                 {patients.map((patient) => {
-                  if (patient.isVerified === "false")
+                  if (patient.isVerified === "pending")
                     return (
                       <ListItem sx={listItem}>
                         <Grid container>
                           <Grid item xs={12} sm={9}>
                             <Typography>
-                              Email: {patient.email} <br />
+                              Email: {patient.valemail} <br />
                               Name: {patient.name}
                             </Typography>
                           </Grid>

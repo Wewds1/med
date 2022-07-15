@@ -14,30 +14,30 @@ import {
 } from "recharts";
 import Title from "./dashboard/title";
 
-function createData(date, weight) {
-  return { date, weight };
+function createData(date, pulse) {
+  return { date, pulse };
 }
 
-const WeightGraph = (props) => {
+const PulseGraph = (props) => {
   const theme = useTheme();
-  const [weights, setWeights] = useState([]);
+  const [pulse, setPulse] = useState([]);
 
   useEffect(() => {
     db.collection("patients")
       .doc(props.uid)
-      .collection("weight")
+      .collection("pulse")
       .onSnapshot((snapshot) => {
-        setWeights(snapshot.docs.map((doc) => doc.data()));
+        setPulse(snapshot.docs.map((doc) => doc.data()));
       });
   }, []);
 
   const data = [];
   {
-    weights.map((weight) => {
+    pulse.map((pulse) => {
       data.push(
         createData(
-          new Date(weight.sentAt.seconds * 1000).toLocaleDateString("en-US"),
-          weight.weight
+          new Date(pulse.sentAt.seconds * 1000).toLocaleDateString("en-US"),
+          pulse.pulse
         )
       );
     });
@@ -45,7 +45,7 @@ const WeightGraph = (props) => {
 
   return (
     <React.Fragment>
-      <Title>Weight</Title>
+      <Title>Pulse Rate</Title>
       <ResponsiveContainer width="100%">
         <LineChart
           data={data}
@@ -68,7 +68,7 @@ const WeightGraph = (props) => {
                 ...theme.typography.body1,
               }}
             >
-              Weight (kg)
+              Pulse Rate  (%)
             </Label>
           </YAxis>
           <Tooltip />
@@ -76,7 +76,7 @@ const WeightGraph = (props) => {
           <Line
             isAnimationActive={false}
             type="monotone"
-            dataKey="weight"
+            dataKey="pulse"
             activeDot={{ r: 8 }}
             stroke={theme.palette.primary.main}
           />
@@ -86,4 +86,4 @@ const WeightGraph = (props) => {
   );
 };
 
-export default WeightGraph;
+export default PulseGraph;

@@ -14,30 +14,30 @@ import {
 } from "recharts";
 import Title from "./dashboard/title";
 
-function createData(date, weight) {
-  return { date, weight };
+function createData(date, temperature) {
+  return { date, temperature };
 }
 
-const WeightGraph = (props) => {
+const TempGraph  = (props) => {
   const theme = useTheme();
-  const [weights, setWeights] = useState([]);
+  const [temperatures, setTemp] = useState([]);
 
   useEffect(() => {
     db.collection("patients")
       .doc(props.uid)
-      .collection("weight")
+      .collection("temperature")
       .onSnapshot((snapshot) => {
-        setWeights(snapshot.docs.map((doc) => doc.data()));
+        setTemp(snapshot.docs.map((doc) => doc.data()));
       });
   }, []);
 
   const data = [];
   {
-    weights.map((weight) => {
+    temperatures.map((temperature) => {
       data.push(
         createData(
-          new Date(weight.sentAt.seconds * 1000).toLocaleDateString("en-US"),
-          weight.weight
+          new Date(temperature.sentAt.seconds * 1000).toLocaleDateString("en-US"),
+          temperature.temperature
         )
       );
     });
@@ -45,7 +45,7 @@ const WeightGraph = (props) => {
 
   return (
     <React.Fragment>
-      <Title>Weight</Title>
+      <Title>Body Temperature</Title>
       <ResponsiveContainer width="100%">
         <LineChart
           data={data}
@@ -68,7 +68,7 @@ const WeightGraph = (props) => {
                 ...theme.typography.body1,
               }}
             >
-              Weight (kg)
+              Temperature (°C)
             </Label>
           </YAxis>
           <Tooltip />
@@ -76,8 +76,8 @@ const WeightGraph = (props) => {
           <Line
             isAnimationActive={false}
             type="monotone"
-            dataKey="weight"
-            activeDot={{ r: 8 }}
+            dataKey="temperature"
+            activeDot={{ r: 10 }}
             stroke={theme.palette.primary.main}
           />
         </LineChart>
@@ -86,4 +86,4 @@ const WeightGraph = (props) => {
   );
 };
 
-export default WeightGraph;
+export default TempGraph;

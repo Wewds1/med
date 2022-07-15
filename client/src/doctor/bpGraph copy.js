@@ -14,30 +14,30 @@ import {
 } from "recharts";
 import Title from "./dashboard/title";
 
-function createData(date, weight) {
-  return { date, weight };
+function createData(date, sugarLevel) {
+  return { date, sugarLevel };
 }
 
-const WeightGraph = (props) => {
+const BPGraph = (props) => {
   const theme = useTheme();
-  const [weights, setWeights] = useState([]);
+  const [sugarLevels, setSugarLevels] = useState([]);
 
   useEffect(() => {
     db.collection("patients")
       .doc(props.uid)
-      .collection("weight")
+      .collection("bloodSugarLevel")
       .onSnapshot((snapshot) => {
-        setWeights(snapshot.docs.map((doc) => doc.data()));
+        setSugarLevels(snapshot.docs.map((doc) => doc.data()));
       });
   }, []);
 
   const data = [];
   {
-    weights.map((weight) => {
+    sugarLevels.map((sugar) => {
       data.push(
         createData(
-          new Date(weight.sentAt.seconds * 1000).toLocaleDateString("en-US"),
-          weight.weight
+          new Date(sugar.sentAt.seconds * 1000).toLocaleDateString("en-US"),
+          sugar.sugarLevel
         )
       );
     });
@@ -45,7 +45,7 @@ const WeightGraph = (props) => {
 
   return (
     <React.Fragment>
-      <Title>Weight</Title>
+      <Title>Blood Pressure </Title>
       <ResponsiveContainer width="100%">
         <LineChart
           data={data}
@@ -68,7 +68,7 @@ const WeightGraph = (props) => {
                 ...theme.typography.body1,
               }}
             >
-              Weight (kg)
+              Blood Pressure (mg/dL)
             </Label>
           </YAxis>
           <Tooltip />
@@ -76,7 +76,7 @@ const WeightGraph = (props) => {
           <Line
             isAnimationActive={false}
             type="monotone"
-            dataKey="weight"
+            dataKey="sugarLevel"
             activeDot={{ r: 8 }}
             stroke={theme.palette.primary.main}
           />
@@ -86,4 +86,4 @@ const WeightGraph = (props) => {
   );
 };
 
-export default WeightGraph;
+export default BPGraph;

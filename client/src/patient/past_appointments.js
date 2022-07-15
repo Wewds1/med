@@ -39,6 +39,8 @@ const Past_Appointments = () => {
         setDoctors(snapshot.docs.map((doc) => doc.data()));
       });
   }, []);
+
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   return (
     <>
       <Navbar />
@@ -57,11 +59,11 @@ const Past_Appointments = () => {
                   <Grid container>
                     <Grid item xs={12} sm={6}>
                       <Typography>
-                        <b>Mode:</b> {appointment.mode} <br />
+                        <b>Name:</b> {appointment.mode} <br />
                         <b>Slot:</b>{" "}
                         {new Date(
                           appointment.timeSlot.seconds * 1000
-                        ).toLocaleDateString("en-US")}
+                        ).toLocaleDateString("en-US", options)}
                         ,
                         {new Date(
                           appointment.timeSlot.seconds * 1000
@@ -81,6 +83,7 @@ const Past_Appointments = () => {
                           patientUID={appointment.patientUID}
                         />
                       </Typography>
+                     
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
@@ -96,7 +99,7 @@ const Past_Appointments = () => {
                       <Button
                         variant="contained"
                         href={`/doctor_profile/${appointment.doctorUID}`}
-                        target="_blank"
+                        target="_self"
                       >
                         See Doctor
                       </Button>

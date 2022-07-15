@@ -49,6 +49,7 @@ const Doctor_Schedule_Meeting = () => {
                   <Grid container spacing={3}>
                     <Grid item xs={12} sm={9}>
                       <Typography>
+                      Patient's Name: {meeting.mode} <br />
                         Meeting ID: {meeting.meetingID} <br />
                         Scheduled At:{" "}
                         {new Date(

@@ -23,6 +23,7 @@ const Patient_Scheduled_Meetings = () => {
         setMeetings(snapshot.docs.map((doc) => doc.data()));
       });
   }, []);
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
   return (
     <>
@@ -43,7 +44,7 @@ const Patient_Scheduled_Meetings = () => {
                         Scheduled At:{" "}
                         {new Date(
                           meeting.scheduledAt.seconds * 1000
-                        ).toLocaleDateString("en-US")}
+                        ).toLocaleDateString("en-US",options)}
                         ,
                         {new Date(
                           meeting.scheduledAt.seconds * 1000

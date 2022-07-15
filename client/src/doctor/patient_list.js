@@ -37,7 +37,8 @@ const Patient_List = (props) => {
               <Grid item xs={12} sm={3} md={3}>
                 <Button
                   variant="contained"
-                  href={`/patient_profile/${props.uid}`}
+                  href={`/patient_profile/${patient.uid}`}
+                  target = "_self"
                 >
                   See Profile
                 </Button>

@@ -31,6 +31,7 @@ const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
   const history = useHistory();
   const { currentUser } = useAuth();
+  const [patients, setPatients] = useState([]);
 
   // FETCHING APPOINTMENTS' DATA FROM DB
   useEffect(() => {
@@ -42,6 +43,11 @@ const Appointments = () => {
         );
       });
   }, []);
+  useEffect(() => {
+    db.collection("patients").onSnapshot((snapshot) => {
+      setPatients(snapshot.docs.map((doc) => doc.data()));
+    });
+  }, []);
 
   // HANDLE APPOINTMENT CONFIRM BUTTON
   const handleConfirm = (docID, patientUID) => {
@@ -51,7 +57,7 @@ const Appointments = () => {
 
     db.collection("doctors")
       .doc(currentUser.uid)
-      .collection("patients")
+      .collection("patients") 
       .doc(patientUID)
       .set({
         patientUID: patientUID,
@@ -69,7 +75,7 @@ const Appointments = () => {
       message:
         "Your appointment has been confirmed! You can check its details in the scheduled meetings section.",
       sentAt: new Date(),
-    });
+    }); 
 
     db.collection("patients").doc(patientUID).update({
       unreadCount: 1,
@@ -89,7 +95,7 @@ const Appointments = () => {
       sentAt: new Date(),
     });
   };
-
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   return (
     <>
       <Navbar />
@@ -100,21 +106,23 @@ const Appointments = () => {
             <Title>New Appointments</Title>
             <Paper sx={paper}>
               <List>
-                {appointments.map((appointment) => {
+                {appointments.map((appointment) => { 
+                  
                   if (
                     appointment.isConfirmed === "pending" &&
                     appointment.doctorUID === currentUser.uid
                   )
-                    return (
+                    return ( 
+                      
                       <ListItem sx={listItem}>
                         <Grid container>
                           <Grid item xs={12} sm={6} md={9}>
                             <Typography>
-                              Mode: {appointment.mode} <br />
+                              Name: {appointment.mode} <br/>
                               Slot:{" "}
                               {new Date(
                                 appointment.timeSlot.seconds * 1000
-                              ).toLocaleDateString("en-US")}
+                              ).toLocaleDateString("en-US",options)}
                               ,
                               {new Date(
                                 appointment.timeSlot.seconds * 1000
@@ -124,7 +132,7 @@ const Appointments = () => {
                                 appointment.timeSlot.seconds * 1000
                               ).getMinutes()}
                               <br />
-                              Symptoms: {appointment.symptoms}
+                              Patients's Complaints: {appointment.symptoms}
                             </Typography>
                           </Grid>
 
@@ -144,8 +152,9 @@ const Appointments = () => {
                                     meetingID: appointment.id,
                                     doctorUID: appointment.doctorUID,
                                     patientUID: appointment.patientUID,
-                                    scheduledAt: appointment.timeSlot,
+                                    scheduledAt: appointment.timeSlot,  
                                     mode: appointment.mode,
+                                    name: appointment.name,
                                   })
                                 }
                               >
@@ -180,7 +189,8 @@ const Appointments = () => {
                           </Grid>
                         </Grid>
                       </ListItem>
-                    );
+                          );
+                            
                 })}
               </List>
             </Paper>
@@ -201,11 +211,11 @@ const Appointments = () => {
                         <Grid container>
                           <Grid item xs={12} sm={9}>
                             <Typography>
-                              Mode: {appointment.mode} <br />
+                              Patient's Name: {appointment.mode} <br />
                               Slot:{" "}
                               {new Date(
                                 appointment.timeSlot.seconds * 1000
-                              ).toLocaleDateString("en-US")}
+                              ).toLocaleDateString("en-US",options  )}
                               ,
                               {new Date(
                                 appointment.timeSlot.seconds * 1000
@@ -215,7 +225,7 @@ const Appointments = () => {
                                 appointment.timeSlot.seconds * 1000
                               ).getMinutes()}
                               <br />
-                              Symptoms: {appointment.symptoms}
+                              Patient's Complaints: {appointment.symptoms}
                             </Typography>
                           </Grid>
                         </Grid>

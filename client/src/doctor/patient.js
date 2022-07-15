@@ -8,6 +8,9 @@ import Title from "./dashboard/title";
 import { container, paper, avatar, upload } from "./styles";
 import BPGraph from "./bpGraph";
 import WeightGraph from "./weightGraph";
+import PulseGraph from "./pulserate";
+import TempGraph from "./temp.js";
+import OxygenGraph from "./oxygenLevel";
 import Past_Appointments from "./past_appointments";
 
 const Patient = () => {
@@ -48,23 +51,30 @@ const Patient = () => {
 
                 {/* PATIENT'S PROFILE */}
                 <Grid item xs={12} md={8} lg={9}>
-                  <Paper
-                    sx={{
-                      height: "100%",
-                      p: 2,
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
+                  <Paper sx={paper}>
                     <Title>Profile</Title>
+                    <Typography sx={{ fontStyle: "italic" }}>
+                      (You can update these details by going to the dashboard
+                      tab)
+                    </Typography>
                     <Typography>Name: {patient.name}</Typography>
                     <Typography>Age: {patient.age}</Typography>
                     <Typography>Gender: {patient.gender}</Typography>
                     <Typography>Blood Group: {patient.bloodGroup}</Typography>
                     <Typography>
                       Address: {patient.address1}, {patient.address2},{" "}
-                      {patient.city}, {patient.state}, {patient.country},{" "}
-                      {patient.pincode}
+                      {patient.city}, {patient.state}, {patient.country}
+                    </Typography>
+                    <Typography>Pincode: {patient.pincode}</Typography>
+                    <Typography variant="subtitle2">
+                      Last updated at:{" "}
+                      {new Date(
+                        patient.updatedAt.seconds * 1000
+                      ).toLocaleDateString("en-US")}
+                      , at{" "}
+                      {new Date(patient.updatedAt.seconds * 1000).getHours()}:
+                      {new Date(patient.updatedAt.seconds * 1000).getMinutes()}{" "}
+                      hrs
                     </Typography>
                   </Paper>
                 </Grid>
@@ -83,7 +93,7 @@ const Patient = () => {
                   </Paper>
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                   <Paper
                     sx={{
                       p: 2,
@@ -95,13 +105,40 @@ const Patient = () => {
                     <WeightGraph uid={patient.uid} />
                   </Paper>
                 </Grid>
-
-                <Grid item xs={12}>
-                  <Paper sx={paper}>
-                    <Past_Appointments
-                      patientUID={patient.uid}
-                      doctorUID={currentUser.uid}
-                    />
+                <Grid item xs={6}>
+                  <Paper
+                    sx={{
+                      p: 2,
+                      display: "flex",
+                      flexDirection: "column",
+                      height: 275,
+                    }}
+                  >
+                    <PulseGraph uid={patient.uid} />
+                  </Paper>
+                </Grid>
+                <Grid item xs={6}>
+                  <Paper
+                    sx={{
+                      p: 2,
+                      display: "flex",
+                      flexDirection: "column",
+                      height: 275,
+                    }}
+                  >
+                    <TempGraph uid={patient.uid} />
+                  </Paper>
+                </Grid>
+                <Grid item xs={6}>
+                  <Paper
+                    sx={{
+                      p: 2,
+                      display: "flex",
+                      flexDirection: "column",
+                      height: 275,
+                    }}
+                  >
+                    <OxygenGraph uid={patient.uid} />
                   </Paper>
                 </Grid>
               </Grid>

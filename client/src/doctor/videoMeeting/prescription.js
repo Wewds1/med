@@ -21,6 +21,8 @@ import SendIcon from "@mui/icons-material/Send";
 import DownloadIcon from "@mui/icons-material/Download";
 import { jsPDF } from "jspdf";
 
+import { WrapperVariantContext } from "@mui/lab/internal/pickers/wrappers/WrapperVariantContext";
+
 const Prescription = (props) => {
   const [open, setOpen] = useState(false);
   const { currentUser } = useAuth();
@@ -36,6 +38,7 @@ const Prescription = (props) => {
   var patientName = "";
   var patientAge = "";
   var patientGender = "";
+  var doctorimageURL;
 
   var date = new Date().toLocaleDateString("en-US");
 
@@ -70,6 +73,8 @@ const Prescription = (props) => {
         doctorName = doctor.name;
         doctorSpeciality = doctor.medicalSpeciality;
         doctorRegNumber = doctor.regNumber;
+        doctorimageURL = doctor.imageURL;
+
       }
     });
   }
@@ -89,6 +94,10 @@ const Prescription = (props) => {
     setOpen(true);
   };
 
+  const handleClickPrint = () => {
+    window.print();
+    setOpen(true);
+  };
   const handleClose = () => {
     setOpen(false);
   };
@@ -113,35 +122,62 @@ const Prescription = (props) => {
 
     setPrescription("");
   };
+  const deletePrescription = (e) => {
+    e.preventDefault();
+
+    //PUSHING MESSAGE IN DATABASE
+    db.collection('doctors')
+    .doc(`${props.doctorUID}`)
+    .collection("patients")
+    .doc(`${props.patientUID}`)
+    .collection("prescriptions").get().then(querySnapshot => {
+      querySnapshot.docs.forEach(snapshot => {
+          snapshot.ref.delete();
+      })
+  })
+
+    setPrescription("");
+  };
+
+ 
+
+
 
   //DOWNLOAD PRESCRIPTION FUNCTION
   const downloadPrescription = () => {
-    var doc = new jsPDF();
+    var doc = new jsPDF();    
     var i = 20;
     var j = 150;
-    doc.setFontSize("15");
-  
-    doc.text("Date: ", 20, 30);
-    doc.text(date, 50, 30);
-    doc.text("Doctor: ", 20, 40);
-    doc.text(doctorName, 50, 40);
-    doc.text("Medical Speciality: ", 20, 50);
-    doc.text(doctorSpeciality, 70, 50);
-    doc.text("License Number: ", 20, 60);
-    doc.text(doctorRegNumber, 80, 60  );
-    doc.text("Patient: ", 20, 80);
-    doc.text(patientName, 50, 80);
-    doc.text("Age: ", 20, 90);
-    doc.text(patientAge, 50, 90);
-    doc.text("Gender: ", 20, 100);
-    doc.text(patientGender, 50, 100);
-    doc.text("Prescription: ", 20, 130);
+    doc.setFontSize("17");
+    doc.addImage("/images/title.png", "PNG", 60, 3, 100, 20);
+    doc.addImage("/images/paofiLogo.png", "PNG", 0, 15, 50, 25); //top left, space sa taas(margin-top), width, height
+    doc.addImage("/images/clinic_logo.png", "PNG", 170, 15,30, 20);
+    doc.text("FATHER ANGELO FALARDI HEALTH CLINIC", 43, 30  );
+    doc.text("13 Sto. Niño St. Area A Payatas, Quezon City", 43, 35);
+    doc.setFontSize("25");
+    doc.text("Date : ", 130, 55);
+    doc.text(date, 160, 55);
+    doc.text("Doctor's Name : ",70, 270);
+    doc.text(doctorName, 150, 270);
+    doc.text("License # : ", 70, 280);
+    doc.text(doctorRegNumber, 150, 280);
+    doc.text("Patient : ", 20, 70);
+    doc.text(patientName, 60, 70);
+    doc.text("Age : ", 20, 80);
+    doc.text(patientAge, 50, 80);
+    doc.text("Gender : ", 20, 90);
+    doc.text(patientGender, 60, 90);
+    doc.addImage("/images/Rx.png", "PNG", 5, 100, 50, 25);
     prescriptions.map((prescript) => {
       doc.text(prescript.prescription, i, j);
       j = j + 10;
-    });
-    doc.save("doctor_prescription.pdf");
+    }); 
+    doc.autoPrint();
+    window.open(doc.output('bloburl'), '_blank',"toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=500,width=700,height=500");
+    
+   
   };
+
 
   return (
     <div>
@@ -185,7 +221,7 @@ const Prescription = (props) => {
 
           {/* FORM TO WRITE PRESCRIPTION */}
 
-          <form onSubmit={sendPrescription}>
+          <form onSubmit={sendPrescription} >
             <TextField
               id="outlined"
               required
@@ -204,21 +240,34 @@ const Prescription = (props) => {
           {/* DOWNLOAD REPORT BUTTON */}
           <Button
             onClick={downloadPrescription}
+            type = "submit"
             style={{
               textTransform: "none",
               margin: "2%",
             }}
+            
             startIcon={<DownloadIcon />}
           >
             Download Prescription
           </Button>
+          <Button
+            onClick={deletePrescription}
+            style={{
+              textTransform: "none",
+              margin: "2%",
+            }}
+          > 
+            Delete Prescription
+          </Button>
+       
+        
           <Button onClick={handleClose} color="primary">
             Close
           </Button>
         </DialogActions>
         </Dialog>
       </div>
-  );
+  );  
 };
 
 export default Prescription;

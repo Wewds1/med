@@ -7,6 +7,9 @@ import Title from "./dashboard/title";
 import { container, paper, avatar, upload } from "./styles";
 import BPGraph from "./bpGraph";
 import WeightGraph from "./weightGraph";
+import PulseGraph from "./pulserate";
+import TempGraph from "./temp.js";
+import OxygenGraph from "./oxygenLevel";
 
 const Patient_Profile = () => {
   const { currentUser } = useAuth();
@@ -76,23 +79,59 @@ const Patient_Profile = () => {
                       p: 2,
                       display: "flex",
                       flexDirection: "column",
-                      height: 275,
+                      height: 300,
                     }}
                   >
                     <BPGraph uid={patient.uid} />
                   </Paper>
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                   <Paper
                     sx={{
                       p: 2,
                       display: "flex",
                       flexDirection: "column",
-                      height: 275,
+                      height: 300,
                     }}
                   >
                     <WeightGraph uid={patient.uid} />
+                  </Paper>
+                </Grid>
+                <Grid item xs={6}>
+                  <Paper
+                    sx={{
+                      p: 2,
+                      display: "flex",
+                      flexDirection: "column",
+                      height: 300,
+                    }}
+                  >
+                    <PulseGraph uid={patient.uid} />
+                  </Paper>
+                </Grid>
+                <Grid item xs={6}>
+                  <Paper
+                    sx={{
+                      p: 2,
+                      display: "flex",
+                      flexDirection: "column",
+                      height: 300,
+                    }}
+                  >
+                    <TempGraph uid={patient.uid} />
+                  </Paper>
+                </Grid>
+                <Grid item xs={6}>
+                  <Paper
+                    sx={{
+                      p: 2,
+                      display: "flex",
+                      flexDirection: "column",
+                      height: 300,
+                    }}
+                  >
+                    <OxygenGraph uid={patient.uid} />
                   </Paper>
                 </Grid>
               </Grid>

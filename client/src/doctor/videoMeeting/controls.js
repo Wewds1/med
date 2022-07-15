@@ -41,6 +41,7 @@ const Controls = () => {
             <>
               <Chat {...props} />
               <Prescription {...props} />
+
               <Update {...props} />
             </>
           );

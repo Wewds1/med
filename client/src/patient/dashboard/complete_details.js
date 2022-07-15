@@ -18,6 +18,7 @@ const theme = createTheme();
 
 const Complete_Details = (props) => {
   const [name, setName] = useState("");
+  const [valemail, setValid] = useState("");
   const [bloodGroup, setBloodGroup] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
@@ -28,6 +29,7 @@ const Complete_Details = (props) => {
   const [pincode, setPincode] = useState("");
   const [country, setCountry] = useState("");
   const [nameError, setNameError] = useState("");
+  const [validError, setValidError] = useState("");
   const [bloodGroupError, setBloodGroupError] = useState("");
   const [ageError, setAgeError] = useState("");
   const [genderError, setGenderError] = useState("");
@@ -41,6 +43,7 @@ const Complete_Details = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setValidError("");
     setNameError("");
     setAgeError();
     setGenderError("");
@@ -53,8 +56,9 @@ const Complete_Details = (props) => {
       setNameError("Name is Required");
       return;
     }
-    if (bloodGroup === "") {
-      setBloodGroupError("Blood group is Required");
+    if (valemail === "") {
+      setValidError("Email is Required");
+      return;
     }
     if (age === "") {
       setAgeError("Age is Required");
@@ -89,6 +93,7 @@ const Complete_Details = (props) => {
     patientRef.set({
       uid: props.uid,
       name,
+      valemail,
       bloodGroup,
       age,
       gender,
@@ -99,7 +104,7 @@ const Complete_Details = (props) => {
       country,
       pincode,
       imageURL: null,
-      isVerified: "true",
+      isVerified: "pending",
       unreadCount: 0,
       updatedAt: new Date(),
     });
@@ -116,6 +121,7 @@ const Complete_Details = (props) => {
       <form onSubmit={handleSubmit}>
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           {nameError && <Alert severity="error">{nameError}</Alert>}
+          {validError && <Alert severity="error">{validError}</Alert>}
           {ageError && <Alert severity="error">{ageError}</Alert>}
           {genderError && <Alert severity="error">{genderError}</Alert>}
           {addressError && <Alert severity="error">{addressError}</Alert>}
@@ -145,6 +151,18 @@ const Complete_Details = (props) => {
             <Grid item xs={12} sm={6}>
               <TextField
                 required
+                id="validemail"
+                name="validemail"
+                label="Valid Email"
+                fullWidth
+                size="small"
+                onChange={(e) => setValid(e.target.value)}
+                error={validError}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                
                 id="Blood Group"
                 name="Blood Group"
                 label="Blood Group"

@@ -16,7 +16,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import GoogleIcon from "@mui/icons-material/Google";
 import firebase, { db, auth } from "../firebase";
-import { box, signupGrid } from "./styles";
+import { box, signupGrid, button } from "./styles";
 
 const theme = createTheme();
 
@@ -231,7 +231,7 @@ const Patient_Signup = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 2, mb: 1 }}
+                sx={button }
               >
                 Sign Up
               </Button>

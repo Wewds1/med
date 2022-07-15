@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link, Toolbar, Typography } from "@mui/material";
-import { link, navbarToolbar, title, titleToolbar } from "./styles";
+import { link, navbarToolbar, title, titleToolbar, picsss } from "./styles";
+import { borderRadius } from "@mui/material/node_modules/@mui/system";
 
 const Navbar = (props) => {
   const { sections } = props;
@@ -9,19 +10,36 @@ const Navbar = (props) => {
     <React.Fragment id="">
       {/* TITLE */}
       <Toolbar sx={titleToolbar}>
+        <picsss
+              
+                marginTop="5px"
+                marginLeft="10px"
+                max-height="100%"
+        >
+          <img
+         height = "150px"
+         width  = "500px"
+          src={process.env.PUBLIC_URL + "images/title.png"}
+        />
+        </picsss>
+      </Toolbar>
+      {/* <Toolbar sx={titleToolbar}>
         <Typography
           variant="h3"
           color="inherit"
           align="center"
           noWrap
+          font ="Courier"
           sx={title}
+          
+        />
         >
-          MedMeet
+          MEDMEET
         </Typography>
-      </Toolbar>
+      </Toolbar> */}
 
-      {/* LINKS TO VARIOUS SECTIONS */}
-      <Toolbar component="nav" variant="dense" sx={navbarToolbar}>
+    {/* LINKS TO VARIOUS SECTIONS */}
+        <Toolbar component="nav" variant="dense" sx={navbarToolbar}>
         {sections.map((section) => (
           <Link
             color="inherit"

@@ -56,7 +56,7 @@ const Navbar = () => {
       <CssBaseline />
 
       {/* APPBAR */}
-      <AppBar position="fixed" open={open} sx={{ backgroundColor: "#1e90ff" }}>
+      <AppBar position="fixed" open={open} sx={{ backgroundColor: "#d083b4" }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -152,7 +152,7 @@ const Navbar = () => {
           </ListItem>
 
           {/* SIGN OUT */}
-          <ListItem button onClick={handleSignout}>
+          <ListItem button href="http://localhost:3000/" onClick={handleSignout}>
             <Tooltip title="Sign Out" placement="right">
               <ListItemIcon>
                 <LogoutIcon />

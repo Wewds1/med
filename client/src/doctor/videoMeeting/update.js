@@ -19,15 +19,18 @@ import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 const Update = (props) => {
   const [open, setOpen] = useState(false);
   const { currentUser } = useAuth();
-  const [sugarLevel, setSugarLevel] = useState("");
+  const [bloodLevel, setBloodLevel] = useState("");
   const [weight, setWeight] = useState("");
+  const [pulse, setPulse] = useState("");
+  const [temperature, setTemp] = useState("");
+  const [oxygen, setOxygen] = useState("");
 
   //FUNCTIONS TO OPEN AND CLOSE DIALOG BOX
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = () => { 
     setOpen(false);
   };
 
@@ -38,10 +41,10 @@ const Update = (props) => {
     //PUSHING BP DATA IN DATABASE
     db.collection("patients")
       .doc(`${props.patientUID}`)
-      .collection("bloodSugarLevel")
+      .collection("bloodPressureLevel")
       .doc(`${props.meetingID}`)
       .set({
-        sugarLevel: sugarLevel,
+        bloodLevel: bloodLevel,
         senderUid: props.doctorUID,
         senderEmail: currentUser.email,
         sentAt: new Date(),
@@ -61,8 +64,46 @@ const Update = (props) => {
         appointmentID: props.meetingID,
       });
 
+      db.collection("patients")
+      .doc(`${props.patientUID}`)
+      .collection("temperature")
+      .doc(`${props.meetingID}`)
+      .set({
+        temperature: temperature,
+        senderUid: props.doctorUID,
+        senderEmail: currentUser.email,
+        sentAt: new Date(),
+        appointmentID: props.meetingID,
+      });
+
+      db.collection("patients")
+      .doc(`${props.patientUID}`)
+      .collection("pulse")
+      .doc(`${props.meetingID}`)
+      .set({
+        pulse: pulse,
+        senderUid: props.doctorUID,
+        senderEmail: currentUser.email,
+        sentAt: new Date(),
+        appointmentID: props.meetingID,
+      });
+      db.collection("patients")
+      .doc(`${props.patientUID}`)
+      .collection("oxygen")
+      .doc(`${props.meetingID}`)
+      .set({
+        oxygen: oxygen,
+        senderUid: props.doctorUID,
+        senderEmail: currentUser.email,
+        sentAt: new Date(),
+        appointmentID: props.meetingID,
+      });
+
     setWeight("");
-    setSugarLevel("");
+    setBloodLevel("");
+    setTemp("");
+    setOxygen("");
+    setPulse("");
   };
 
   return (
@@ -93,12 +134,12 @@ const Update = (props) => {
                 <TextField
                   id="outlined"
                   required
-                  label="Blood-Sugar-Level (mg/dL)"
+                  label="Blood Pressure (mmHg)"
                   color="primary"
-                  placeholder="Blood Sugar Level (mg/dL)"
-                  value={sugarLevel}
+                  placeholder="Blood Pressure (mmHg)"
+                  value={bloodLevel}
                   onChange={(e) => {
-                    setSugarLevel(e.target.value);
+                    setBloodLevel(e.target.value);
                   }}
                 />
               </Grid>
@@ -113,6 +154,48 @@ const Update = (props) => {
                   value={weight}
                   onChange={(e) => {
                     setWeight(e.target.value);
+                  }}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  id="outlined"
+                  required
+                  label="Pulse Rate"
+                  color="primary"
+                  placeholder="Pulse Rate (%)"
+                  value={pulse}
+                  onChange={(e) => {
+                    setPulse(e.target.value);
+                  }}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  id="outlined"
+                  required
+                  label="Oxygen Level"
+                  color="primary"
+                  placeholder="Oxygen Level(%)"
+                  value={oxygen}
+                  onChange={(e) => {
+                    setOxygen(e.target.value);
+                  }}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  id="outlined"
+                  required
+                  label="Temperature"
+                  color="primary"
+                  placeholder="Body Temperature (°C)"
+                  value={temperature}
+                  onChange={(e) => {
+                    setTemp(e.target.value);
                   }}
                 />
               </Grid>

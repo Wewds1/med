@@ -47,31 +47,17 @@ const Footer = () => {
        
 
         <Grid container>
-          {/* CONNECT WITH US */}
+         {/* CONNECT WITH US */}
           <Grid item xs={12} md={4}>
-            <Typography variant="h6" gutterBottom sx={footerTitle}>
-            Developed by TechTalk
-            </Typography>
-            <Typography variant="body2">
-                Fatima Rubis
-              </Typography>
-              <Typography variant="body2">
-                Steven Lloyd Ferriol
-              </Typography>
-              <Typography variant="body2">
-                John Mark Tizado
-              </Typography>
-              <Typography variant="body2">
-                Andrei Bustamante
-              </Typography>
-              <Typography variant="body2">
-                Allen Borja
+            <Typography variant="h6"  gutterBottom sx={footerTitle}>
+            Developed by TechTalk  
+
               </Typography>
             
           </Grid>
           <Grid item xs={12} md={4}>
             <Typography variant="h6" gutterBottom sx={footerTitle}>
-            MedMeet
+            MEDMEET
             </Typography>
             <IconButton href="https://www.facebook.com/kuya.mo.steven" sx={iconButton}>
               <FacebookIcon/>
@@ -86,7 +72,7 @@ const Footer = () => {
             <Typography variant="h6" gutterBottom sx={footerTitle}>
               Contact us
             </Typography>
-            <IconButton href="https://mail.google.com/mail/u/0/" sx={iconButton}>
+            <IconButton href="/admin_signin" sx={iconButton}>
               <EmailIcon />
               <Typography variant="body2">
                 daveallenborja@gmail.com{" "}

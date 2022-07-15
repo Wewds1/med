@@ -22,10 +22,13 @@ const Book_Appointment = (props) => {
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState("");
   const [mode, setMode] = useState("");
+  const [name, setName] = useState("");
   const [timeSlot, setTimeSlot] = useState(new Date());
   const [symptoms, setSymptoms] = useState("");
   const [timeError, setTimeError] = useState("");
   const { currentUser } = useAuth();
+
+  
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -35,6 +38,10 @@ const Book_Appointment = (props) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const leaveMeeting = () => {
+    alert("You Booked an appointment");
   };
 
   const descriptionElementRef = useRef(null);
@@ -59,6 +66,7 @@ const Book_Appointment = (props) => {
   };
 
   const handleSubmit = (e) => {
+    
     e.preventDefault();
     if (
       timeSlot.getHours() <
@@ -66,9 +74,13 @@ const Book_Appointment = (props) => {
       timeSlot.getHours() > new Date(props.endTime.seconds * 1000).getHours()
     ) {
       setTimeError("Please enter time in the time slot of the doctor!");
+      alert("Enter the working hours of doctor");
     } else {
       // PUSHING APPOINTMENT DATA IN DB
+
+      
       db.collection("appointments").add({
+        name: name,
         mode: mode,
         timeSlot: timeSlot,
         symptoms: symptoms,
@@ -78,9 +90,18 @@ const Book_Appointment = (props) => {
         bookedAt: new Date(),
       });
 
+     
+
       setOpen(false);
+
+     
     }
+    
   };
+  
+
+  
+  
 
   // console.log(timeSlot.getDay());
   // console.log(new Date(props.startTime.seconds * 1000).getDay());
@@ -88,6 +109,7 @@ const Book_Appointment = (props) => {
 
   return (
     <>
+    {timeError && <Alert severity="error">{timeError}</Alert>}
       <Button variant="contained" onClick={() => handleClickOpen()}>
         Book Appointment
       </Button>
@@ -101,7 +123,7 @@ const Book_Appointment = (props) => {
       >
         <DialogTitle id="scroll-dialog-title">Book Appointment</DialogTitle>
         <form onSubmit={handleSubmit}>
-          {timeError && <Alert severity="error">{timeError}</Alert>}
+          
           <DialogContent dividers={scroll === "paper"}>
             <DialogContentText
               id="scroll-dialog-description"
@@ -109,23 +131,19 @@ const Book_Appointment = (props) => {
               tabIndex={-1}
             >
               <Grid container spacing={1}>
-                {/* MODE OF CONSULTATION */}
-                <Grid item xs={12}>
+              <Grid item xs={12}>
                   <TextField
-                    required
                     id="mode"
                     name="mode"
-                    label="Mode of Consultation"
+                    required
+                    label="Patient's Full Name"
                     fullWidth
                     size="small"
-                    select
                     onChange={(e) => setMode(e.target.value)}
-                  >
-                    <MenuItem value="Online">Online</MenuItem>
-                    <MenuItem value="Offline">Offline</MenuItem>
-                  </TextField>
+                  />
                 </Grid>
-
+                {/* MODE OF CONSULTATION */}
+               
                 {/* DATE AND TIME SLOT */}
                 <Grid item xs={12}>
                   <Typography>Preferred Date and Time Slot </Typography>
@@ -158,7 +176,7 @@ const Book_Appointment = (props) => {
                   <TextField
                     id="symptoms"
                     name="symptoms"
-                    label="Symptoms"
+                    label="Patient's Complaints"
                     fullWidth
                     size="small"
                     onChange={(e) => setSymptoms(e.target.value)}
@@ -168,8 +186,8 @@ const Book_Appointment = (props) => {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => handleClose()}>Cancel</Button>
-            <Button type="submit">Book</Button>
+            <Button variant = "contained" onClick={() => handleClose()}>Cancel</Button>
+            <Button variant = "contained" onClick = {leaveMeeting} type = "submit">Book</Button>
           </DialogActions>
         </form>
       </Dialog>

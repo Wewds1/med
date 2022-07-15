@@ -1,22 +1,38 @@
 // NAVBAR SECTION
+//* {
+  //font-family: 'Gantari', sans-serif;
+//}
+
+import { borderRadius } from "@mui/material/node_modules/@mui/system";
+import { areIntervalsOverlapping } from "date-fns";
+import { transparentPaper } from "../patient/styles";
 
 export const titleToolbar = {
-  borderBottom: 1,
-  borderColor: "divider",
-  backgroundColor: "#ffb3de",
-  color: "#f8f8ff",
+  display: 'flex',
+  marginLeft:"10px",
+  position: "center",
+};
+
+export const picsss = {
+  color: '#fff',
+  display: 'flex',
+  alignItems: 'center',
+  textDecoration: 'none',
+  marginTop: '20px',
+  height: '100%',
+  cursor: 'pointer',
 };
 
 export const title = {
   flex: 1,
   fontWeight: "bold",
-  fontFamily: "Raleway",
+  fontFamily: "Verdana",
 };
 
 export const navbarToolbar = {
   justifyContent: "space-between",
   overflowX: "auto",
-  backgroundColor: "#ffddf4",
+  backgroundColor: "ebaac8",
 };
 
 export const link = {
@@ -31,15 +47,19 @@ export const link = {
     backgroundColor: "#ff55a3",
     color: "#ffffff",
   },
+  borderRadius: "20px",
 };
+
 
 // HEADER SECTION
 
 export const headerPaper = {
   position: "relative",
-  backgroundColor: "grey.800",
+  backgroundColor: "#e06377",
   color: "#fff",
-  mb: 4,
+  mb: '4',
+  marginTop: "35px",
+  marginBottom: "-65px",
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center",
@@ -59,26 +79,29 @@ export const raleway = {
 // REGISTER SECTION
 
 export const button = {
-  backgroundColor: "#1e90ff",
+  backgroundColor: "#ff7c52",
   color: "#ffffff",
   margin: "1%",
   fontFamily: "Raleway",
   fontWeight: "bold",
   "&:hover": {
-    backgroundColor: "#d7e8f4",
-    color: "#3284be",
+    backgroundColor: "red",
+    color: "#ffffff",
   },
+  
 };
 
 export const cardMedia = {
   width: 200,
   height: 220,
   display: { xs: "none", sm: "block" },
+
 };
 
 export const boldRaleway = {
   fontFamily: "Raleway",
   fontWeight: "bold",
+  borderRadius: "20px",
 };
 
 // ABOUT SECTION
@@ -139,7 +162,7 @@ export const card = {
 
 export const footerBox = {
   py: 0.2,
-  backgroundColor: "#1e90ff",
+  backgroundColor: "#d099bc",
   color: "#ffffff",
 };
 
