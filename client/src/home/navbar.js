@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Link, Toolbar, Typography } from "@mui/material";
 import { link, navbarToolbar, title, titleToolbar, picsss } from "./styles";
-import { borderRadius } from "@mui/material/node_modules/@mui/system";
 
 const Navbar = (props) => {
   const { sections } = props;
